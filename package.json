@@ -9,7 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "15.1.7",
+    "@shadcn/ui": "^0.0.4",
+    "framer-motion": "^12.4.5",
+    "lucide-react": "^0.475.0",
+    "next": "^15.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -17,5 +20,18 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.2",
     "tailwindcss": "^3.4.17"
-  }
+  },
+  "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "postcss.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/camillettss/ThePortService.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/camillettss/ThePortService/issues"
+  },
+  "homepage": "https://github.com/camillettss/ThePortService#readme"
 }
