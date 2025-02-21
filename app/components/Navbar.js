@@ -25,7 +25,7 @@ const Navbar = () => {
       } flex items-center px-6`}
     >
       <div className="mx-auto space-x-9">
-        <Link href="/noleggio" className="text-white-700 hover:text-white">
+        <Link href="/noleggio" className="text-white-7000 hover:text-white">
           Noleggio
         </Link>
         <Link href="/trasporto" className="text-white-700 hover:text-white">

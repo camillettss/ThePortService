@@ -12,10 +12,13 @@ module.exports = {
       },
 
       colors: {
-        primary: "#3774a3",  // Blu personalizzato
+        primary: "#66a0ca",  // Blu personalizzato
         secondary: "#FF5733", // Arancione personalizzato
-        dark: "#121212", // Grigio molto scuro
-        wallpaper: "#c7e0e7",
+        dark: "#2a263f", // Blu molto scuro
+        wallpaper: "#d6eae8", // old: c7e0e7
+        wallpaper_dark: "#226e8e",
+        detail: "#efd89c",
+        wallpaper_darker: "#99b8ba",
       },
 
       borderRadius: {
