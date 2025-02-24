@@ -77,12 +77,12 @@ const Form = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input type="text" name="name" placeholder="Nome" className="w-full p-2 border rounded-md" onChange={handleChange} required />
-          <input type="email" name="email" placeholder="Email" className="w-full p-2 border rounded-md" onChange={handleChange} required />
-          <input type="tel" name="phone" placeholder="Telefono" className="w-full p-2 border rounded-md" onChange={handleChange} required />
-          <input type="date" name="date" className="w-full p-2 border rounded-md" onChange={handleChange} required />
-          <input type="time" name="time" className="w-full p-2 border rounded-md" onChange={handleChange} required />
-          <textarea name="details" placeholder="Dettagli aggiuntivi" className="w-full p-2 border rounded-md" onChange={handleChange}></textarea>
+          <input type="text" name="name" placeholder="Nome" className="w-full p-2 border rounded-md text-black placeholder-gray-800" onChange={handleChange} required />
+          <input type="email" name="email" placeholder="Email" className="w-full p-2 border rounded-md text-black placeholder-gray-800" onChange={handleChange} required />
+          <input type="tel" name="phone" placeholder="Telefono" className="w-full p-2 border rounded-md text-black placeholder-gray-800" onChange={handleChange} required />
+          <input type="date" name="date" className="w-full p-2 border rounded-md text-black placeholder-gray-800" onChange={handleChange} required />
+          <input type="time" name="time" className="w-full p-2 border rounded-md text-black placeholder-gray-800" onChange={handleChange} required />
+          <textarea name="details" placeholder="Dettagli aggiuntivi" className="w-full p-2 border rounded-md text-black placeholder-gray-800" onChange={handleChange}></textarea>
 
           <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded-md font-semibold hover:bg-orange-600 transition-all">
             Prenota
