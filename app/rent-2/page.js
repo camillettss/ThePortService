@@ -1,13 +1,13 @@
 "use client"
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import Head from 'next/head';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-export default function CarRentalPage() {
+// Create a component that uses useSearchParams
+function CarRentalContent() {
   const searchParams = useSearchParams();
-
   const date = searchParams.get("date");
 
   const [cars, setCars] = useState([]);
@@ -29,24 +29,11 @@ export default function CarRentalPage() {
   }, [date]);
 
   const handleSelectCar = (car) => {
-
+    // Implementation for selecting a car
   }
 
   return (
     <>
-      <Head>
-        <title>Rent a Car</title>
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com/"
-          crossOrigin=""
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&family=Work+Sans%3Awght%40400%3B500%3B700%3B900"
-        />
-        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-      </Head>
       <div
         className="relative flex size-full min-h-screen flex-col bg-[#111418] dark group/design-root overflow-x-hidden"
         style={{ fontFamily: '"Work Sans", "Noto Sans", sans-serif' }}
@@ -256,6 +243,35 @@ export default function CarRentalPage() {
           </div>
         </div>
       </div>
+    </>
+  );
+}
+
+// Main component with Suspense boundary
+export default function CarRentalPage() {
+  return (
+    <>
+      <Head>
+        <title>Rent a Car</title>
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com/"
+          crossOrigin=""
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&family=Work+Sans%3Awght%40400%3B500%3B700%3B900"
+        />
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+      </Head>
+      
+      <Suspense fallback={
+        <div className="flex items-center justify-center min-h-screen bg-[#111418]">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+        </div>
+      }>
+        <CarRentalContent />
+      </Suspense>
     </>
   );
 }
