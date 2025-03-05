@@ -12,6 +12,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Car {
+  id          String  @id @default(uuid()) // Identificativo unico
+  name        String  // Nome dell'auto (es. Fiat Panda)
+  pricePerDay Int     // Prezzo al giorno
+  image       String? // URL immagine
+  bookings    RentalBooking[] // Relazione con le prenotazioni
+}
+
+model RentalBooking {
+  id      String  @id @default(uuid())
+  carId   String  // Auto prenotata
+  car     Car     @relation(fields: [carId], references: [id], onDelete: Cascade)
+  date    DateTime // Data di prenotazione
+}
+
+
 model Booking {
   id        String   @id @default(uuid())
   name      String

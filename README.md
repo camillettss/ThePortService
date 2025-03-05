@@ -1,24 +1,24 @@
+# The Port Service
+## Website's code
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Ho scritto questo codice per ThePortService s.r.l. , tutti i diritti di questo codice sono riservati all'autore, Francesco Camilletti.
 
-## Getting Started
+## Funzionalità
+L'azienda offre questi servizi:
+- Noleggio veicoli
+- NCC
+- Deposito bagagli
+- Lavanderia e Sartoria
 
-First, run the development server:
+ovviamente, le prenotazioni di questi servizi sono differenti quindi ho creato diversi form, uno per ogni servizio.
+una cosa che tutti hanno in comune è la data e una referenza al cliente. innanzitutto chiederemo nome, cognome e data.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Generic Form
+un rettangolino in overlay che chiede delle informazioni di base, le useremo come filtri durante la ricerca nel database.
+quando viene cliccato il tasto "submit" si attiva una href per la pagina di ricerca passata come prop.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Book a Rental - Form
+qui è possibile prenotare un veicolo. Innanzitutto bisogna scegliere quale.
 
 ## Learn More
 

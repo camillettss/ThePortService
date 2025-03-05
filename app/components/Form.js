@@ -1,7 +1,6 @@
 'use client';
-
 import { useState } from 'react';
-import { Resend } from 'resend';
+import { motion } from "framer-motion";
 
 const Form = () => {
   const [service, setService] = useState('rental');
@@ -24,7 +23,7 @@ const Form = () => {
     e.preventDefault();
     
     if (isSubmitting) return; // Evita doppi invii
-    setIsSubmitting(true); // Disabilita il pulsante
+    setIsSubmitting(true); // Disabilitando il pulsante
 
     const response = await fetch("/api/booking", {
         method: "POST",
