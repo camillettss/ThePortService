@@ -13,20 +13,28 @@ function CarRentalContent() {
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setLoading(true); // Imposta il caricamento all'inizio
-    fetch(`/api/cars/available?date=${date}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setCars(data); // Aggiorna lo stato con i dati ricevuti
-        setLoading(false); // Disattiva il caricamento
-      })
-      .catch((error) => {
-        console.error("Errore nel caricamento delle auto:", error);
-        setLoading(false); // Anche in caso di errore, togliamo il loading
-        setCars([]);
-      });
-  }, [date]);
+  const updateDate = () => {
+    useEffect(() => {
+      setLoading(true); // Imposta il caricamento all'inizio
+      fetch(`/api/cars/available?date=${date}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setCars(data); // Aggiorna lo stato con i dati ricevuti
+          setLoading(false); // Disattiva il caricamento
+        })
+        .catch((error) => {
+          console.error("Errore nel caricamento delle auto:", error);
+          setLoading(false); // Anche in caso di errore, togliamo il loading
+          setCars([]);
+        });
+    }, [date]);
+  }
+
+  updateDate();
+
+  const handleChangeDate = () => {
+    // 
+  }
 
   const handleSelectCar = (car) => {
     // Implementation for selecting a car
@@ -40,7 +48,7 @@ function CarRentalContent() {
       >
         <div className="layout-container flex h-full grow flex-col">
           <div className="gap-1 px-6 flex flex-1 justify-center py-5">
-            <div className="layout-content-container flex flex-col w-80">
+            <div className="hidden lg:block layout-content-container flex flex-col w-80">
               <h3 className="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Filter</h3>
               <div className="flex gap-3 p-3 flex-wrap pr-4">
                 <div className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-[#293038] pl-4 pr-4">
@@ -88,116 +96,213 @@ function CarRentalContent() {
               </div>
               <div className="flex flex-wrap items-center justify-center gap-6 p-4">
                 <div className="flex min-w-72 max-w-[336px] flex-1 flex-col gap-0.5">
-                  <div className="flex items-center p-1 justify-between">
-                    <button>
-                      <div className="text-white flex size-10 items-center justify-center" data-icon="CaretLeft" data-size="18px" data-weight="regular">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor" viewBox="0 0 256 256">
-                          <path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"></path>
-                        </svg>
-                      </div>
-                    </button>
-                    <p className="text-white text-base font-bold leading-tight flex-1 text-center">Sep 2022</p>
-                    <button>
-                      <div className="text-white flex size-10 items-center justify-center" data-icon="CaretRight" data-size="18px" data-weight="regular">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor" viewBox="0 0 256 256">
-                          <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"></path>
-                        </svg>
-                      </div>
-                    </button>
-                  </div>
-                  <div className="grid grid-cols-7">
-                    <p className="text-white text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">S</p>
-                    <p className="text-white text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">M</p>
-                    <p className="text-white text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">T</p>
-                    <p className="text-white text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">W</p>
-                    <p className="text-white text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">T</p>
-                    <p className="text-white text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">F</p>
-                    <p className="text-white text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">S</p>
-                    <button className="h-12 w-full text-white col-start-4 text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">1</div>
-                    </button>
-                    <button className="h-12 w-full text-white text-sm font-medium leading-normal"><div className="flex size-full items-center justify-center rounded-full">2</div></button>
-                    <button className="h-12 w-full text-white text-sm font-medium leading-normal"><div className="flex size-full items-center justify-center rounded-full">3</div></button>
-                    <button className="h-12 w-full text-white text-sm font-medium leading-normal"><div className="flex size-full items-center justify-center rounded-full">4</div></button>
-                    <button className="h-12 w-full text-white rounded-l-full bg-[#293038] text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full bg-[#1980e6]">5</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">6</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">7</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">8</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">9</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">10</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">11</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">12</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">13</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">14</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">15</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">16</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">17</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">18</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">19</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">20</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">21</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">22</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">23</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">24</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">25</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">26</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">27</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">28</div>
-                    </button>
-                    <button className="h-12 w-full bg-[#293038] text-white text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full">29</div>
-                    </button>
-                    <button className="h-12 w-full text-white rounded-r-full bg-[#293038] text-sm font-medium leading-normal">
-                      <div className="flex size-full items-center justify-center rounded-full bg-[#1980e6]">30</div>
-                    </button>
-                  </div>
+
+                  {/* Interactive Calendar Component */}
+                  {(() => {
+                    // Calendar state
+                    const [currentDate, setCurrentDate] = useState(() => {
+                      // Use the URL date or default to today
+                      if (date) {
+                        return new Date(date);
+                      }
+                      return new Date();
+                    });
+
+                    const [selectedDate, setSelectedDate] = useState(() => {
+                      if (date) {
+                        return new Date(date);
+                      }
+                      return new Date();
+                    });
+
+                    // Calendar utility functions
+                    const getDaysInMonth = (year, month) => {
+                      return new Date(year, month + 1, 0).getDate();
+                    };
+
+                    const getFirstDayOfMonth = (year, month) => {
+                      return new Date(year, month, 1).getDay();
+                    };
+
+                    const getPreviousMonthDays = (year, month) => {
+                      const firstDayOfMonth = getFirstDayOfMonth(year, month);
+                      if (firstDayOfMonth === 0) return []; // Sunday is 0, no need for previous month days
+
+                      const daysInPreviousMonth = getDaysInMonth(year, month - 1);
+                      const previousMonthDays = [];
+
+                      for (let i = 0; i < firstDayOfMonth; i++) {
+                        previousMonthDays.unshift(daysInPreviousMonth - i);
+                      }
+
+                      return previousMonthDays;
+                    };
+
+                    // Month navigation
+                    const goToPreviousMonth = () => {
+                      setCurrentDate(prevDate => {
+                        const newDate = new Date(prevDate);
+                        newDate.setMonth(newDate.getMonth() - 1);
+                        return newDate;
+                      });
+                    };
+
+                    const goToNextMonth = () => {
+                      setCurrentDate(prevDate => {
+                        const newDate = new Date(prevDate);
+                        newDate.setMonth(newDate.getMonth() + 1);
+                        return newDate;
+                      });
+                    };
+
+                    // Date selection
+                    const handleDateClick = (day) => {
+                      const newSelectedDate = new Date(
+                        currentDate.getFullYear(),
+                        currentDate.getMonth(),
+                        day+1
+                      );
+                      setSelectedDate(newSelectedDate);
+                      
+
+                      // Format date as YYYY-MM-DD for the URL
+                      const formattedDate = newSelectedDate.toISOString().split('T')[0];
+
+                      // Use Next.js router to update URL
+                      window.location.href = `?date=${formattedDate}`;
+                    };
+
+                    // Get current year and month
+                    const year = currentDate.getFullYear();
+                    const month = currentDate.getMonth();
+
+                    // Get month name
+                    const monthNames = [
+                      "January", "February", "March", "April", "May", "June",
+                      "July", "August", "September", "October", "November", "December"
+                    ];
+                    const monthName = monthNames[month];
+
+                    // Get days for the calendar grid
+                    const daysInMonth = getDaysInMonth(year, month);
+                    const previousMonthDays = getPreviousMonthDays(year, month);
+
+                    const calendarDays = [];
+
+                    // Previous month days
+                    previousMonthDays.forEach(day => {
+                      calendarDays.push({
+                        day,
+                        isCurrentMonth: false,
+                        isSelected: false
+                      });
+                    });
+
+                    // Current month days
+                    for (let day = 1; day <= daysInMonth; day++) {
+                      const date = new Date(year, month, day);
+                      const isSelected =
+                        selectedDate &&
+                        date.getDate() === selectedDate.getDate() &&
+                        date.getMonth() === selectedDate.getMonth() &&
+                        date.getFullYear() === selectedDate.getFullYear();
+
+                      calendarDays.push({
+                        day,
+                        isCurrentMonth: true,
+                        isSelected
+                      });
+                    }
+
+                    // Fill the remaining slots for a complete grid
+                    const totalSlots = Math.ceil(calendarDays.length / 7) * 7;
+                    const nextMonthDays = totalSlots - calendarDays.length;
+
+                    for (let day = 1; day <= nextMonthDays; day++) {
+                      calendarDays.push({
+                        day,
+                        isCurrentMonth: false,
+                        isSelected: false
+                      });
+                    }
+
+                    return (
+                      <>
+                        {/* Calendar header with month navigation */}
+                        <div className="flex items-center p-1 justify-between">
+                          <button onClick={goToPreviousMonth}>
+                            <div className="text-white flex size-10 items-center justify-center" data-icon="CaretLeft" data-size="18px" data-weight="regular">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor" viewBox="0 0 256 256">
+                                <path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"></path>
+                              </svg>
+                            </div>
+                          </button>
+                          <p className="text-white text-base font-bold leading-tight flex-1 text-center">
+                            {monthName} {year}
+                          </p>
+                          <button onClick={goToNextMonth}>
+                            <div className="text-white flex size-10 items-center justify-center" data-icon="CaretRight" data-size="18px" data-weight="regular">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor" viewBox="0 0 256 256">
+                                <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"></path>
+                              </svg>
+                            </div>
+                          </button>
+                        </div>
+
+                        {/* Calendar weekday headers */}
+                        <div className="grid grid-cols-7">
+                          <p className="text-white text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">S</p>
+                          <p className="text-white text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">M</p>
+                          <p className="text-white text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">T</p>
+                          <p className="text-white text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">W</p>
+                          <p className="text-white text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">T</p>
+                          <p className="text-white text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">F</p>
+                          <p className="text-white text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">S</p>
+
+                          {/* Calendar days */}
+                          {calendarDays.map((calendarDay, index) => {
+                            const { day, isCurrentMonth, isSelected } = calendarDay;
+
+                            // Determine day classes
+                            let dayClasses = "h-12 w-full text-sm font-medium leading-normal ";
+
+                            if (isCurrentMonth) {
+                              dayClasses += isSelected ?
+                                "text-white " :
+                                "text-white ";
+
+                              // Add background and border radius
+                              if (isSelected) {
+                                dayClasses += "bg-[#293038] ";
+                              }
+
+                              // Add rounded corners for the first and last selected days of a range
+                              // Here we just handle single selection
+                              if (isSelected) {
+                                dayClasses += "rounded-full ";
+                              }
+                            } else {
+                              // Previous or next month days (grayed out)
+                              dayClasses += "text-[#9dabb8] ";
+                            }
+
+                            return (
+                              <button
+                                key={`${isCurrentMonth ? 'current' : 'other'}-${day}-${index}`}
+                                className={dayClasses}
+                                onClick={() => isCurrentMonth && handleDateClick(day)}
+                                disabled={!isCurrentMonth}
+                              >
+                                <div className={`flex size-full items-center justify-center rounded-full ${isSelected ? 'bg-[#1980e6]' : ''}`}>
+                                  {day}
+                                </div>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </>
+                    );
+                  })()}
                 </div>
               </div>
               <div className="flex px-4 py-3">
@@ -211,8 +316,8 @@ function CarRentalContent() {
             <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
               <div className="flex flex-wrap justify-between gap-3 p-4">
                 <div className="flex min-w-72 flex-col gap-3">
-                  <p className="text-white tracking-light text-[32px] font-bold leading-tight">Rent a car in San Francisco</p>
-                  <p className="text-[#9dabb8] text-sm font-normal leading-normal">See all cars available on Sep 10, 2022</p>
+                  <p className="text-white tracking-light text-[32px] font-bold leading-tight">Noleggia un Auto</p>
+                  <p className="text-[#9dabb8] text-sm font-normal leading-normal">Vedi tutte le auto disponibili il 05.02.2025</p>
                 </div>
               </div>
               <h3 className="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Featured rentals</h3>
@@ -228,7 +333,7 @@ function CarRentalContent() {
                     <div className="flex h-full shrink-0 items-center justify-center gap-x-2 rounded-xl bg-[#293038] pl-4 pr-4">
                       {cars.map((car) => (
                         <div key={car.id} className="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-40">
-                          <div className="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl flex flex-col"style={{ backgroundImage: 'url("/panda.jpg")' }}></div>
+                          <div className="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl flex flex-col" style={{ backgroundImage: 'url("/panda.jpg")' }}></div>
                           <div>
                             <p className="text-white text-base font-medium leading-normal">{car.name}</p>
                             <p className="text-[#9dabb8] text-sm font-normal leading-normal">${car.pricePerDay}/day</p>
@@ -264,7 +369,7 @@ export default function CarRentalPage() {
         />
         <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
       </Head>
-      
+
       <Suspense fallback={
         <div className="flex items-center justify-center min-h-screen bg-[#111418]">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
