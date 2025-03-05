@@ -3,10 +3,11 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Suspense } from 'react'
 
 export default function CarDetailsPage() {
-  const searchParams = useSearchParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   // Recupero i parametri dalla URL
   const carId = searchParams.get("car");
@@ -14,7 +15,7 @@ export default function CarDetailsPage() {
   const email = searchParams.get("email");
   const date = searchParams.get("date");
   const price = searchParams.get("price");
-
+  
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(true); // Stato di caricamento
 
@@ -61,5 +62,14 @@ export default function CarDetailsPage() {
         </button>
       </div>
     </div>
+  );
+}
+
+// Avvolgi il componente con un Suspense Boundary
+export function CarDetailsPageWithSuspense() {
+  return (
+    <Suspense fallback={<div>Caricamento...</div>}>
+      <CarDetailsPage />
+    </Suspense>
   );
 }
